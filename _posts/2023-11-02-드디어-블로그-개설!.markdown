@@ -1,0 +1,22 @@
+---
+layout: post
+title: 드디어 블로그 개설!
+# date: 2017-09-12 13:32:20 +0900
+date: 2023-11-02 13:13:20 +0900
+description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
+img: i-rest.jpg # Add image post (optional)
+fig-caption: # Add figcaption (optional)
+tags: [개발블로그, github page]
+---
+## 드디어 (미루고 미루던) 블로그 개설 성공!
+github page 를 이용해서 블로그를 만드는 것은, 항상 꼭 해야지 꼭 해야지- 해놓고 미뤘던 것 같습니다.
+
+블로그를 만들면서도 꽤나 오류를 만났습니다. 오류는 늘 제 곁에서 떠날 생각이 없어보입니다.
+
+블로그 개설하는 방법에 대해서 첫 글로 정리해볼까 합니다~
+
+다 만들고, 테마를 갑자기 바꾸는 과정까지.. 부지런한 개발자가 되어야겠습니다. 🤪
+
+
+
+
