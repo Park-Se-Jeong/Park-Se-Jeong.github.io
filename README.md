@@ -10,7 +10,7 @@
 
 ## 기술 스택
 
-### 프론트: vue.js, nuxt.js <br><br>
-### 백: node.js, mysql, Sequelize
+프론트: vue.js, nuxt.js <br><br>
+백: node.js, mysql, Sequelize
 
 <br><br>
