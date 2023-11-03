@@ -1,31 +1,16 @@
-# Flexible-Jekyll is a simple and clean theme for Jekyll
+# 2023년에 입사한 이래로 즐겁게 일하고 있습니다.
 
-![](https://github.com/artemsheludko/flexible-jekyll/blob/master/assets/img/promo-img.jpg?raw=true)
+- 풀스택 개발자로 일하고 있습니다.
+- 오히려 시간이 지날수록 배우는 재미를 느끼고 있습니다. 🤪🤔
 
-## Demo
+<br><br>
+#### CONTACT : ssez13@naver.com
+---
 
-Check the theme in action [Demo](https://artemsheludko.github.io/flexible-jekyll/)
 
-The main page would look like this:
+## 기술 스택
 
-![Main page preview](https://github.com/artemsheludko/flexible-jekyll/blob/master/assets/img/home-page.jpg?raw=true)
+### 프론트: vue.js, nuxt.js <br><br>
+### 백: node.js, mysql, Sequelize
 
-The post page would look like this:
-
-![Post page preview](https://github.com/artemsheludko/flexible-jekyll/blob/master/assets/img/post-example.jpg?raw=true)
-
-## Features
-
-- [Google Fonts](https://fonts.google.com/)
-- [Font Awesome](http://fontawesome.io/)
-- [Disqus](https://disqus.com/)
-- [Analytics](https://analytics.google.com/analytics/web/)
-- Support Emoji
-
-## Installation:
-
-Fork the ``master`` branch and follow the [Jekyll Installation Documentation](https://jekyllrb.com/docs/installation/).
-
-## License
-
-GNU General Public License v3.0
+<br><br>
