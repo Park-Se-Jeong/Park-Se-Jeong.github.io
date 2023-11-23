@@ -125,6 +125,11 @@ strong {
   font-weight: inherit;
 }
 
+strong em {
+  font-style: normal;
+  font-size: 1.2rem;
+}
+
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
@@ -775,8 +780,8 @@ html {
 }
 
 body {
-  font-family: 'Lato', sans-serif;
-  color: #515151;
+  font-family: 'Noto sans KR', sans-serif;
+  color: #000;
   background-color: #fbfbfb;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -803,11 +808,13 @@ img+em {
 }
 
 blockquote {
-  border-left: 5px solid #000;
   padding-left: 1.1rem;
-  margin-left: 1rem;
-  font-style: italic;
-  color: #ada8a8;
+  margin-left: 0;
+  background: #e6f0fc;
+  padding: 1.1rem;
+  border-radius: 15px;
+
+
 }
 
 pre {
@@ -1177,6 +1184,7 @@ footer .copyright {
 
 .post .post-content p {
   margin-top: 0;
+  font-size: 1rem;
 }
 
 a.older-posts,
@@ -1205,7 +1213,7 @@ a.newer-posts:hover {
 
 /* - - - - - - - - - - Post Page Styles - - - - - - - - - - */
 .wrap-content {
-  padding: 20px;
+  padding: 48px;
 }
 
 .header-page {
@@ -1257,6 +1265,14 @@ a.newer-posts:hover {
   height: 100%;
 }
 
+.content {
+  font-size: 1.1rem;
+
+  p {
+    padding: 0.8rem;
+  }
+}
+
 .page-footer {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1303,12 +1319,14 @@ a.newer-posts:hover {
 
 .page-footer .page-tag a {
   text-decoration: none;
-  font-size: 10px;
+  font-size: 1rem;
   padding: 5px 10px;
   margin-left: 5px;
-  color: #263959;
+  color: #fff;
   text-transform: uppercase;
-  border: 1px solid #263959;
+  border-radius: 10px;
+  background: #263959;
+  /* border: 1px solid #263959; */
 }
 
 .page-footer .page-tag a:hover {
