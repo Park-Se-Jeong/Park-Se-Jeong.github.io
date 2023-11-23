@@ -808,13 +808,11 @@ img+em {
 }
 
 blockquote {
-  padding-left: 1.1rem;
-  margin-left: 0;
   background: #e6f0fc;
   padding: 1.1rem;
   border-radius: 15px;
-
-
+  margin: 0;
+  margin-top: 8px;
 }
 
 pre {
@@ -1213,6 +1211,7 @@ a.newer-posts:hover {
 
 /* - - - - - - - - - - Post Page Styles - - - - - - - - - - */
 .wrap-content {
+  /* padding: 36px; */
   padding: 48px;
 }
 
@@ -1317,6 +1316,12 @@ a.newer-posts:hover {
   background-color: #ecf0f1;
 }
 
+.page-footer .page-tag {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .page-footer .page-tag a {
   text-decoration: none;
   font-size: 1rem;
@@ -1326,7 +1331,7 @@ a.newer-posts:hover {
   text-transform: uppercase;
   border-radius: 10px;
   background: #263959;
-  /* border: 1px solid #263959; */
+  margin-top: 4px;
 }
 
 .page-footer .page-tag a:hover {
@@ -1485,6 +1490,10 @@ a.newer-posts:hover {
   .contact-title,
   .copyright {
     display: none;
+  }
+
+  .wrap-content {
+    padding: 24px;
   }
 }
 
