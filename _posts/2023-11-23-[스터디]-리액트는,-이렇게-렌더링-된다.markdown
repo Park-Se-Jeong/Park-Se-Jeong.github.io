@@ -4,7 +4,7 @@ title: [스터디] 리액트는, 이렇게 렌더링 된다.
 # date: 2017-09-12 13:32:20 +0900
 date: 2023-11-23 13:13:20 +0900
 description: 리액트의 렌더링에 대해 알아보자! # Add post description (optional)
-img: 2023-11-23.png # Add image post (optional)
+img: 2023-11-23.jpg # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [리액트, 렌더링, 가상DOM, react, fiber, rendering]
 ---
