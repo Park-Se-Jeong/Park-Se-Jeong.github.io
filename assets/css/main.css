@@ -1477,8 +1477,8 @@ a.newer-posts:hover {
 
   .about {
     text-align: center;
-    max-width: 480px;
-    margin: 10px auto auto;
+    width: 100%;
+    margin: 0;
   }
 
   .about img {
