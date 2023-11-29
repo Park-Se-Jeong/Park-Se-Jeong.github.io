@@ -1,0 +1,23 @@
+name: Create Pull Request to Master
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  createPR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create PR to master
+        uses: repo-sync/pull-request@v2
+        with:
+          github_token: ${{ secrets.REPO_BLOG_TOKEN }}
+          pr_title: "Auto PR from Develop to Master"
+          pr_body: "Automatically created PR to merge changes from Develop to Master."
+          pr_label: "automerge"
+          destination_branch: "master"
+          source_branch: "develop"
