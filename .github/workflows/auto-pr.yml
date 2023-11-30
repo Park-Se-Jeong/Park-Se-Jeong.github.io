@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-       - name: Get last commit message
+      - name: Get last commit message
         id: last-commit-message
         run: echo "::set-output name=message::$(git log -1 --pretty=format:%s)"
 
