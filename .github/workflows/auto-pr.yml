@@ -12,11 +12,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+       - name: Get last commit message
+        id: last-commit-message
+        run: echo "::set-output name=message::$(git log -1 --pretty=format:%s)"
+
       - name: Create PR to master
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.REPO_BLOG_TOKEN }}
-          pr_title: "Auto PR from Develop to Master"
+          pr_title: ${{ steps.last-commit-message.outputs.message }}
           pr_body: "Automatically created PR to merge changes from Develop to Master."
           pr_label: "automerge"
           destination_branch: "master"
