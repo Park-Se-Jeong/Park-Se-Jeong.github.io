@@ -1,10 +1,9 @@
 ---
 layout: post
 title: 숨참고 HOOK DIVE (작성중)
-# date: 2017-09-12 13:32:20 +0900
 date: 2023-11-30 15:54:20 +0900
 description: 리액트 훅 요모조모 뜯어보기 # Add post description (optional)
-img: 2023-11-23.jpg # Add image post (optional)
+img: 2023-11-30.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [react, Hook]
 ---
@@ -42,7 +41,7 @@ tags: [react, Hook]
 >
 > 1. **useState** - 상태
 > 2. **useEffect** - 상태를 감시하는
-> 3. **useMemo** - 연산부터 컴포넌트까지 기억하기
+> 3. **useMemo** - 연산부터 컴포넌트까지 기억하기 -> 컴포넌트는 React.memo로 ...
 > 4. **useCallback** - 함수 기억하기
 > 5. **useRef** - useState 짝퉁
 > 6. **useContext** - 상태는 Context 를 타고
@@ -151,11 +150,166 @@ playground 페이지에서 제가 간단히 실습해보고 예시를 가져와 
 
 <br>
 
+## 게으른 초기화
+
+게으른 초기화는, 말 그대로 게으름 그 자체인데요.   
+**최초 렌더링 됐을 때 딱 한 번 실행**되고, **그 뒤로는 무시**돼요.   
+아무리 리렌더링이 돼도, 다시 실행되지 않습니다.  
 
 
-## 
+
+우선, 게으른 초기화는   
+이럴 때 사용하라고 공식문서에 적혀 있어요.
+
+>
+> 1. 초깃값이 복잡할 때
+> 2. 무거운 연산을 포함하고 있을 때 
+>
+
+역시 이미지로 보는 게 눈에 더 잘 들어올 것 같네요 ㅎㅎ
+
+제가 적용해 본 예시는, 배열에 대한 접근이었는데요.
+map 을 한 번 돌릴 수 있게 해봤어요.
+
+![게으른 초기화 예시]({{site.baseurl}}/assets/img/useState-lazy-initialize.png)
+
+간단하게 조건에 부합하는 지 반환하게 만들어 보고,
+정말 한 번 실행된 후로는 리렌더링 되도 무시되는지 로그에 찍어봤어요. 
 
 
+![게으른 초기화 예시]({{site.baseurl}}/assets/img/useState-lazy-console.png)
+
+정말.. 게으르네요. 잘 되고 있나 봅니다.
+
+
+책에서는 이런 경우 사용하는 걸 권장하고 있어요. 
+
+- `localStorage, sessionStorage`에 접근할 때
+- `배열`에 접근할 때 (ex) map, filter, find, ...etc
+- `복잡한 로직` 을 거쳐야 할 때
+
+
+useState 는 드디어 끝! 이제 useEffect 로 가봅시다.
+
+<br>
+
+---
+
+<br>
+
+## useEffect
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+---
+
+<br>
+
+## useMemo
+
+말 그대로 Memo. 연산의 결과, 컴포넌트 둘 다 기억해 둘 수 있습니다. 
+컴포넌트를 메모이제이션 할 때는, React.memo 를 쓰는 게 더 현명하지만..
+의존성 배열에 넣어놓은 값에 변화가 있다면, 
+콜백을 실행하고 다시 그 결괏값을 저장해둡니다.
+
+음.. 얜 좀 와닿지가 않아서, 저도 그냥 처음부터 다 쳐볼게요.
+
+```javascript
+
+function ExpensiveComponent({ value }) {
+  useEffect(() => {
+    console.log('rendering!')
+  })
+  return <span>{ value + 1000 }</span>
+
+}
+function App() {
+  const [value, setValue] = useState(10)
+  const [, triggerRendering] = useState(false)
+  const memorized = useMemo(
+    () => <ExpensiveComponent value={value}></ExpensiveComponent>, 
+    [value]
+  )
+
+  function handleChange(e) {
+    setValue(Number(e.target.value))
+  } 
+
+  function handleClick(e) {
+    triggerRendering(prev => !prev)
+  } 
+
+  return (
+    <>
+    <input value={value} onChange={handleChange} />
+    <button onClick={handleClick}>렌더링 발생!</button>
+    {memorized}
+    </>
+  )
+}
+
+```
+
+
+<br>
+
+---
+
+<br>
+
+## useCallback
+
+useCallback 은 넘겨받은 callback 을 기억해둡니다.   
+함수를 새로 만들지 않고, 기억해두고 계속 씁니다!   
+
+함수가 계속 재생성되는 건, 메모리를 잡아먹는다는 의미이고   
+결국 성능에 영향을 미친다는 의미가 되는데요.   
+
+이 예시를 보면 이해할 수 있으실 겁니다 😊
+
+(작성중...)
+
+
+```javascript
+
+```
+
+
+<br>
+
+---
+
+<br>
+
+## useRef
+
+
+<br>
+
+---
+
+<br>
+
+## useContext
+
+<br>
+
+---
+
+<br>
+
+## useReducer
 
 ### 
 
@@ -179,14 +333,6 @@ playground 페이지에서 제가 간단히 실습해보고 예시를 가져와 
 
 ---
 
-##
-
-
-
-
-
-
-### 
 
 
 
@@ -194,7 +340,12 @@ playground 페이지에서 제가 간단히 실습해보고 예시를 가져와 
 
 
 
- 
+
+
+
+
+
+
 
 
 
