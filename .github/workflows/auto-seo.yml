@@ -14,8 +14,6 @@ jobs:
 
     - name: Build
       uses: jerryjvl/jekyll-build-action@v1
-      with:
-        token: ${{ secrets.REPO_BLOG_TOKEN }}
 
     - name: Copy sitemap.xml to root
       run: cp _site/sitemap.xml sitemap.xml
