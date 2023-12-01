@@ -1,0 +1,29 @@
+name: auto-seo
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      uses: jekyll/jekyll-action@v2
+      with:
+        token: ${{ secrets.REPO_BLOG_TOKEN }}
+
+    - name: Copy sitemap.xml to root
+      run: cp _site/sitemap.xml sitemap.xml
+
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "ssez13@naver.com"
+        git config --global user.name "Park-Se-Jeong"
+        git add sitemap.xml
+        git commit -m "chore(auto): Update sitemap.xml" || exit 0
+        git push

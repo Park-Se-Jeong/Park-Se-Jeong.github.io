@@ -3,7 +3,7 @@ description: > # this means to ignore newlines until "baseurl:"
   안녕하세요, 개발자 루루(박세정)입니다.
 permalink: ':title/'
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://park-se-jeong.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: #if your site has a twitter account, enter it here
 
 # Author Settings
@@ -11,7 +11,7 @@ author: RURU # add your name
 author-img: profile_circle.png # add your photo
 about-author: 기록이 숙명이 된 주니어 # add description
 social-github: Park-Se-Jeong # add your Github handle
-social-linkedin: # add your Linkedin handle
+social-linkedin: devruru # add your Linkedin handle
 social-email: ssez13@naver.com # add your Email address
 
 # Disqus
