@@ -76,7 +76,7 @@ tags: [react, Hook]
 
 
 
-## useState
+## useState - 상태는 useState가 해결했다굿
 
 **상태, 상태를 바꿔줄 함수, 초깃값.**
 이 세 가지만 기억하면 useState는 쉽습니다. 
@@ -150,7 +150,7 @@ playground 페이지에서 제가 간단히 실습해보고 예시를 가져와 
 
 <br>
 
-## 게으른 초기화
+## 게으른 초기화 - 힘든 일은 다시 반복하고 싶지 않은 마치 like 직장인
 
 게으른 초기화는, 말 그대로 게으름 그 자체인데요.   
 **최초 렌더링 됐을 때 딱 한 번 실행**되고, **그 뒤로는 무시**돼요.   
@@ -197,7 +197,7 @@ useState 는 드디어 끝! 이제 useEffect 로 가봅시다.
 
 <br>
 
-## useEffect
+## useEffect - 의존성 배열 악개
 
 **useEffect 는 의존성 배열에 담긴 값이 바뀌면, 함수를 실행해줍니다.** 
 배열을 채울수도 있고, 비워둘 수도 있고, 아예 빼버릴 수도 있어요.
@@ -251,7 +251,7 @@ return () => {
 > 3. 로직이 과도하게 커지는 건 피해주세요 
 > 4. 굳이 불필요한 외부 함수를 만들진 마세요
 
-
+TODO: 내용 추가..
 
 
 <br>
@@ -260,12 +260,13 @@ return () => {
 
 <br>
 
-## useMemo
+## useMemo - 다양하게 재탕
 
 말 그대로 Memo. 연산의 결과, 컴포넌트 둘 다 기억해 둘 수 있습니다. 
-컴포넌트를 메모이제이션 할 때는, React.memo 를 쓰는 게 더 현명하지만..
-의존성 배열에 넣어놓은 값에 변화가 있다면, 
-콜백을 실행하고 다시 그 결괏값을 저장해둡니다.
+(컴포넌트는 React.memo 를 사용하는 게 더 현명한 방법이라고 합니다.)
+
+`의존성 배열`에 넣어놓은 값에 변화가 있다면,   
+`콜백을 실행하고 다시 그 결괏값을 저장`해둡니다.
 
 음.. 얜 좀 와닿지가 않아서, 저도 그냥 처음부터 다 쳐볼게요.
 
@@ -305,6 +306,9 @@ function App() {
 
 ```
 
+- triggerRendering 으로 렌더링을 강제로 발생시켰지만, memorized 는 리렌더링 되지 않습니다.
+- 의존성으로 선언된 value 가 변경될 때까지, memorized 는 꿋꿋하게 존버합니다..
+
 
 <br>
 
@@ -312,23 +316,75 @@ function App() {
 
 <br>
 
-## useCallback
+## useCallback - Callback 재탕
 
 useCallback 은 넘겨받은 callback 을 기억해둡니다.   
 함수를 새로 만들지 않고, 기억해두고 계속 씁니다!   
 
-함수가 계속 재생성되는 건, 메모리를 잡아먹는다는 의미이고   
-결국 성능에 영향을 미친다는 의미가 되는데요.   
+`함수가 계속 재생성되는 건, 메모리를 잡아먹는다`는 의미이고   
+결국 **성능에 영향을 미친다**는 의미가 되는데요.   
 
 이 예시를 보면 이해할 수 있으실 겁니다 😊
 
-(작성중...)
 
 
 ```javascript
+const ChildComponent = memo(({name, value, onChange}) => {
+  useEffect(() => {
+    console.log('rendering', name)
+  })
 
+  return (
+    <>
+      <h1>
+        {name} {value ? '켜짐' : '꺼짐'}    
+      </h1>
+      <button onClick={onChange}>toggle</button>
+    </>
+  )
+})
+
+function App() {
+  const [status1, setStatus1] = useState(false)
+  const [status2, setStatus2] = useState(false)
+
+  const toggle1 = () => { setStatus1(!status1) }
+  const toggle2 = () => { setStatus2(!status2) }
+
+  return (
+    <>
+      <ChildComponent name="1" value={status1} onChange={toggle1}></ChildComponent>
+      <ChildComponent name="2" value={status2} onChange={toggle2}></ChildComponent>
+    </>
+  )
+
+}
 ```
 
+`ChildComponent` 는 `name, value, onChange` 를 props 로 받아서 그립니다.   
+name, value, onChange 가 바뀌지 않는 한 리렌더링 되지 않습니다.      
+toggle1 쪽 버튼을 클릭하면, 그 ChildComponent 만 바뀌어야 할텐데...    
+이렇게 되면, `모든 ChildComponent 가 다시 리렌더링`됩니다. 왜 그럴까요?
+   
+      
+
+
+> App 의 입장에서는, state 가 바뀌기 때문에 리렌더링됩니다.   
+> ChildComponent 는 그때마다 새롭게 생성된 toggle 함수를 props 로 받습니다.    
+> 버튼을 하나만 클릭해도 양쪽이 다 바뀌는 매직이 벌어집니다... 
+
+
+useCallback 을 이용해서, useMemo 와 마찬가지로 기억해 둘 수 있습니다.   
+use는 약간 재탕을 의미하는 접두사같은 느낌인데요, useCallback 은 말 그대로   
+첫 번째 인수로 받아온 callback 을 메모이제이션 하는겁니다!   
+
+그리고, useEffect를 사용할 때처럼, `기명함수`를 넘겨주면   
+나중에 디버깅하기 용이합니다 :)
+
+
+useMemo와 useCallback 의 차이는 `어떤 대상을 기억해둘거냐`일 뿐,   
+역할은 같습니다. 깊이 생각할 필요는 없을 듯 합니다.
+
 
 <br>
 
@@ -336,16 +392,74 @@ useCallback 은 넘겨받은 callback 을 기억해둡니다.
 
 <br>
 
-## useRef
+## useRef - DOM DOM DOM 대문을 열어라
 
+`useState` 인 듯 아닌 useRef.   
+이 둘은 컴포넌트 내부에서 렌더링이 일어나도 변경 가능한 상태값을 저장합니다.   
+대신, 큰 차이점이 있습니다.
+
+- `useRef`는 반환값인 객체 내부에 있는 current 로 값에 접근, 변경할 수 있습니다.   
+- `useRef`는 **그 값이 변경돼도 리렌더링이 일어나지 않습니다.**
+
+<br>
+
+### useRef는 왜 필요할까요?
+
+`렌더링 영향`을 줄이고 싶은거라면, 전에 봤던 useState 예제처럼   
+로컬 변수로 두고 관리해도 괜찮지 않을까요? 
+
+이 방식은 이런 단점들이 있습니다. 
+
+1. 렌더링이 되지 않았어도, `메모리를 차지`합니다.
+2. 컴포넌트가 여러 번 생성되면, 각 컴포넌트가 모두 value 를 가리킵니다. 
+  - 대부분의 경우, **컴포넌트 당 하나의 값을 필요로 하는 것이 일반적**입니다.
+
+
+이 단점을 모두 극복한 리액트식 접근법이 바로 `useRef` 입니다.
+
+보통 `DOM 에 접근하고 싶을 때` 사용합니다.   
+그럼, 렌더링이 되기 전에 접근하면 **undefined** 을 반환하겠죠?
+
+`렌더링을 발생시키지 않고 원하는 상태값을 저장할 수 있다는 것`이 포인트인데요.   
+이 예시를 한 번 살펴봅시다! 
+
+
+```javascript
+function usePrevious(value) {
+  const ref = useRef()
+  
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+  
+  return ref.current
+}
+
+function someComponent() {
+  const [counter, setCounter] = useState(0)
+  const previousCounter = usePrevious(counter)
+  
+  function handleClick() {
+    setCounter((prev) => prev + 1)
+  }
+
+  return (
+    <button onClick={handleClick}>
+      {counter} {previousCounter}
+    </button>
+  )
+}
+```
+
+이렇게 해서, 렌더링을 일으키지 않고 이전 counter 에 저장되어 있던 값을   
+보관할 수 있게 되었네요 👀
 
 <br>
 
 ---
 
 <br>
-
-## useContext
+## useContext - 흐름으로 넘겨주마 (작성중)...
 
 <br>
 
@@ -355,23 +469,19 @@ useCallback 은 넘겨받은 callback 을 기억해둡니다.
 
 ## useReducer
 
-### 
+<!-- ### -->
 
 
 
-### 
+<!-- ###  -->
+
+
+<!-- --- -->
+
+<!-- ##  -->
 
 
 
----
-
-## 
-
-
-
-> 
-> 
-> 
 
 
 
