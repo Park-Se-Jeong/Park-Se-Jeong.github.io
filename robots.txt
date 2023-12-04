@@ -1,0 +1,14 @@
+User-agent: Googlebot
+Allow : /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: *
+Disallow: /
+
+
+
+
+
+Sitemap: https://park-se-jeong.github.io/sitemap.xml
