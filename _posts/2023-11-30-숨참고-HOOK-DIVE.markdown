@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 숨참고 HOOK DIVE (작성중)
+title: 숨참고 HOOK DIVE
 date: 2023-11-30 15:54:20 +0900
 description: 리액트 훅 요모조모 뜯어보기 # Add post description (optional)
 img: 2023-11-30.png # Add image post (optional)
