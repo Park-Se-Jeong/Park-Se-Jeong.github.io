@@ -253,13 +253,24 @@ SomeComponent.displayName = 'SomeComponent 입니다~'
 
 ### Profiler 설정
 
-> 1. 렌더링을 쉽게 보기 위해 General > Highlight updates when components render 켜두기!      
-> 2. Debugging > Hide logs during second render in Strict Mode 를 끄는 건 선택   
+> 1. 렌더링을 쉽게 보기 위해 **General > Highlight updates when components render 켜두기!**      
+> 2. **Debugging > Hide logs during second render in Strict Mode** 를 끄는 건 선택   
 > 🤔 strict mode 에선 useEffect에 작성한 console.log가 2번 찍히기도 하는데, 이걸 막고싶다면
 > 
-> 3. Profiler > Record why each component rendered while profiling 은 렌더링을 기록하니 개발할 땐 켜보자
+> 3. **Profiler > Record why each component rendered while profiling** 은 렌더링을 기록하니 개발할 땐 켜보자
 
 
+### 예제 코드
+길어서 두 장으로 잘려 있습니다! 
+
+
+![프로파일링 실습 예제코드1]({{site.baseurl}}/assets/img/2023-12-06/profiler-code1.png){: width="" height=""}
+
+![프로파일링 실습 예제코드2]({{site.baseurl}}/assets/img/2023-12-06/profiler-code2.png){: width="" height=""}
+
+렌더링 되는 화면은 이러하네요 ㅎㅎ
+
+![예제코드 렌더링 화면]({{site.baseurl}}/assets/img/2023-12-06/profiler-result.png){: width="" height=""}
 
 <br>
 
@@ -268,8 +279,92 @@ SomeComponent.displayName = 'SomeComponent 입니다~'
 <br>
 
 
+## 프로파일링 탭을 파헤쳐보자
 
-## 절대 실패 예시
+이건 제가 이미지로 간단하게 정리해봤어요!   
+이 이미지면 충분합니다 ㅎㅎ
+
+![프로파일링 메뉴 정리]({{site.baseurl}}/assets/img/2023-12-06/profiler-wrapup.jpg){: width="" height=""}
+
+
+<br> 
+### 렌더링 원인을 파악하고 수정하기
+
+예제 코드에서 useEffect 내부의 `setTimeout 이 최초 렌더링 후 3초 뒤에 text 의 상태를 업데이트`할텐데요.   
+`상태가 변경됐기 때문에 리렌더링`이 일어날겁니다. (예제 코드는 문제 있는 코드!)   
+
+Flamegraph 로 프로파일링 해보면 이렇게 나와요. 
+
+![프로파일링 Flamegraph 결과]({{site.baseurl}}/assets/img/2023-12-06/profile-flame.png){: width="" height=""}
+
+2번 렌더링됐고, 문제의 두 번째 렌더링이 일어나는 원인은 `App`이라고 적혀있습니다.
+`Committed at: 3s` 를 보면 최초 렌더링 되고 3초 후에 commit 된 게 있군요
+
+`Components` 탭으로 넘어가서 살펴보면 State가 코드대로 `1000`으로 바뀌어 있는데요.
+setTimeout을 지워주면 한 번만 렌더링 될 거에요. 
+
+<br>
+
+<div class="divider"></div>
+
+### input에 값을 입력하면...
+이제 input에 값을 와랄랄라 입력해볼텐데요.   
+분석 결과는 이렇게 나왔네요.   
+
+![프로파일링 Flamegraph 결과2 - 인풋 값 입력]({{site.baseurl}}/assets/img/2023-12-06/profile-input.png){: width="" height="600"}
+
+<div class="divider"></div>
+제가 입력한 대로 좌라라락 렌더링이 일어났죠?   
+input에 값을 입력하면 text를 업데이트 해주는 데, `리액트는 상태가 변화되면?` **리렌더링하죠..**  
+왜 입력값을 받는 녀석들은 다 컴포넌트화 하는 지 저도 좀 더 감이오네요..
+이렇게 분리가 되었군요! 
+<div class="divider"></div>
+
+![컴포넌트 분리 후 코드 1]({{site.baseurl}}/assets/img/2023-12-06/profile-refactor1.png){: width="" height=""}
+
+![컴포넌트 분리 후 코드 2]({{site.baseurl}}/assets/img/2023-12-06/profile-refactor2.png){: width="" height=""}
+
+
+이제 다시 프로파일링해보면.. `App은 리렌더링 되지 않고`,   
+`InputText 만 값을 입력할 때마다 리렌더링`이 되고 있어요.
+
+![컴포넌트 분리 후 결과 1 - App]({{site.baseurl}}/assets/img/2023-12-06/refactor-result1.png){: width="400" height=""}
+
+![컴포넌트 분리 후 결과 2 - InputText]({{site.baseurl}}/assets/img/2023-12-06/refactor-result2.png){: width="" height="500"}
+
+
+**InputText 내부에 다른 컴포넌트가 있을 때도 한 번 볼까요?**   
+copyright 문구를 보여주는 컴포넌트를 한 번 넣어봅시다.
+
+![InputText 안에 또 다른 컴포넌트]({{site.baseurl}}/assets/img/2023-12-06/compo-in-compo.png){: width="" height=""}
+
+**InputText 자체가 계속 리렌더링**되니까, `CopyrightComponent` 도 계속 렌더링 될 거에요.
+
+![InputText 안에 또 다른 컴포넌트 profile 결과]({{site.baseurl}}/assets/img/2023-12-06/profile-compocompo.png){: width="" height=""}
+
+
+요렇게 memo 로 감싸줍시다 :) 
+
+```javascript
+const CopyrightComponent = memo(function CopyrightComponent({
+  text,
+}: {
+  text: string
+}) {
+  return <p>{text}</p>
+})
+```
+<div class="divider"></div>
+
+memo로 감싸주고 다시 profiler 를 돌리니까, CopyrightComponent 는 리렌더링되지 않았어요!
+
+![memo로 CopyrightCompo 감싸준 결과]({{site.baseurl}}/assets/img/2023-12-06/memo-result.png){: width="" height=""}
+
+
+
+
+
+
 
 
 <br> 
@@ -279,11 +374,12 @@ SomeComponent.displayName = 'SomeComponent 입니다~'
 
 <br>
 
+크롬 개발자도구는 곧 업데이트 예정...
 ---
 
 <br>
 
-## 편-안한 예시
+## 
 
 
 
