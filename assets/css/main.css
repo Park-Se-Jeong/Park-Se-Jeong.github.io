@@ -1286,7 +1286,10 @@ a.newer-posts:hover {
 
 .content {
   font-size: 1.1rem;
+}
 
+.divider {
+  padding: 16px 0;
 }
 
 .content p {
@@ -1299,6 +1302,12 @@ a.newer-posts:hover {
   background: -webkit-linear-gradient(#51e3ff, #886dff) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
+}
+
+.content strong {
+  color: #51e3ff;
+  text-decoration: underline;
+  text-underline-position: from-font;
 }
 
 .page-footer {
