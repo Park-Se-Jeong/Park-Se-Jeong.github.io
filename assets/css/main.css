@@ -100,6 +100,7 @@ a {
   background-color: transparent;
   /* 1 */
   -webkit-text-decoration-skip: objects;
+  color: #51e3ff;
   /* 2 */
 }
 
@@ -1290,6 +1291,14 @@ a.newer-posts:hover {
 
 .content p {
   padding: 0.6rem;
+}
+
+.content h2,
+.content h3 {
+  /* background: -webkit-linear-gradient(#2056fe, #c9bcff) !important; */
+  background: -webkit-linear-gradient(#51e3ff, #886dff) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 .page-footer {
