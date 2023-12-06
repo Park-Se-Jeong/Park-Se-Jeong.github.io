@@ -6,7 +6,7 @@ date: 2023-11-23 13:13:20 +0900
 description: 리액트의 렌더링에 대해 알아보자! # Add post description (optional)
 img: 2023-11-23.jpg # Add image post (optional)
 fig-caption: # Add figcaption (optional)
-tags: [리액트, 렌더링, 가상DOM, react, fiber, rendering]
+tags: [react, rendering, 리액트, 렌더링, fiber]
 ---
 
 *해당 글은 모던 리액트 Deep Dive 2장을 읽고 정리한 내용입니다.* 
