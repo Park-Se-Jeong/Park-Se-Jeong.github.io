@@ -4,7 +4,7 @@ title: "[글또 9기] 바뀌려는 자 그 무게를 견뎌라"
 # date: 2017-09-12 13:32:20 +0900
 date: 2023-12-08 15:42:20 +0900
 description: 글또 활동에 앞서 제가 어떻게 살아왔는 지 정리해봤어요!  # Add post description (optional)
-img: /2023-12-06/2023-12-06.png # Add image post (optional)
+img: 2023-12-08.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [글또, 회고, looking back myself]
 ---
