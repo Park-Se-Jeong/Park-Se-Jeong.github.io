@@ -457,6 +457,8 @@ template {
   -webkit-border-radius: 3px;
   padding: 0.1rem 0.5rem;
   margin: 0 0.3rem;
+  font-family: 'Noto sans KR', sans-serif;
+
 
 }
 
@@ -781,7 +783,6 @@ template {
 html {
   line-height: 1.5;
   background: black;
-  font-family: 'Noto sans KR', sans-serif;
 }
 
 body {
@@ -790,6 +791,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-bottom: 36px;
+  font-family: 'Noto sans KR', sans-serif;
 }
 
 h1 {
