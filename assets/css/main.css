@@ -455,7 +455,7 @@ template {
   border: 1px solid #51e3ff;
   border-radius: 3px;
   -webkit-border-radius: 3px;
-  padding: 0.1rem 0.5rem;
+  padding: 1px 4px;
   margin: 0 0.3rem;
   font-family: 'Noto sans KR', sans-serif;
 
@@ -781,7 +781,7 @@ template {
 }
 
 html {
-  line-height: 1.5;
+  line-height: 1.8;
   background: black;
 }
 
@@ -1299,7 +1299,8 @@ a.newer-posts:hover {
 }
 
 .content h2,
-.content h3 {
+.content h3,
+.post .post-content .post-title {
   /* background: -webkit-linear-gradient(#2056fe, #c9bcff) !important; */
   background: -webkit-linear-gradient(#51e3ff, #886dff) !important;
   -webkit-background-clip: text !important;
