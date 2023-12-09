@@ -22,6 +22,7 @@ html {
  */
 body {
   margin: 0;
+  font-family: 'No'
 }
 
 /**
@@ -84,7 +85,6 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: monospace, monospace;
   /* 1 */
   font-size: 1em;
   /* 2 */
@@ -780,11 +780,11 @@ template {
 
 html {
   line-height: 1.5;
-  background: black
+  background: black;
+  font-family: 'Noto sans KR', sans-serif;
 }
 
 body {
-  font-family: 'Noto sans KR', sans-serif;
   color: #000;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -986,7 +986,7 @@ table tfoot td {
 }
 
 .about .author-name {
-  font-family: 'Noto sans KR', sans-serif;
+  /* font-family: 'Noto sans KR', sans-serif; */
   margin: 0 0 4px;
   position: relative;
   font-size: 1.5rem;
