@@ -793,7 +793,7 @@ body {
 }
 
 h1 {
-  font-weight: 400;
+  font-weight: 600;
 }
 
 img {
@@ -1296,6 +1296,7 @@ a.newer-posts:hover {
   padding: 0.6rem;
 }
 
+.content h1,
 .content h2,
 .content h3 {
   /* background: -webkit-linear-gradient(#2056fe, #c9bcff) !important; */
